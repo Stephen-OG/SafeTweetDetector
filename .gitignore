@@ -9,27 +9,5 @@ Thumbs.db
 ~$*.pptx
 
 # ── Project-specific exclusions ───────────────────────────────────────────────
-code/
 dataset/
 2025 Sem A Choosing a Project Form.docx
-
-# ── Python ────────────────────────────────────────────────────────────────────
-__pycache__/
-*.py[cod]
-*.pyo
-.env
-.venv/
-venv/
-*.egg-info/
-dist/
-build/
-
-# ── Jupyter ───────────────────────────────────────────────────────────────────
-.ipynb_checkpoints/
-
-# ── Models & large files ──────────────────────────────────────────────────────
-*.h5
-*.pkl
-*.joblib
-*.pt
-*.pth
