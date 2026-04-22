@@ -1,10 +1,9 @@
-# Safe Tweet Detector
+#  Safe Tweet Detector
 ### Multi-Class Harm Detection using Machine Learning and Deep Learning
 
 > **MSc Data Science Final Project** · University of Hertfordshire · Module 7PAM2002  
 > **Student:** Stephen Ogundero (SRN: 24086166) · **Supervisor:** Dhairya Kataria
 
----
 
 ## 📌 Overview
 
@@ -12,7 +11,6 @@ Social media platforms generate billions of interactions daily, making automated
 
 The project implements and compares three models — **Logistic Regression**, **LinearSVC**, and an **LSTM neural network** — trained on the large-scale [BeaverTails](https://huggingface.co/datasets/PKU-Alignment/BeaverTails) dataset.
 
----
 
 ## 🏷️ Harm Categories
 
@@ -23,7 +21,6 @@ The project implements and compares three models — **Logistic Regression**, **
 | **2** | Social/Contextual Harm | Hate speech, discrimination, offensive language, controversial politics |
 | **3** | Safe | No harmful categories present |
 
----
 
 ## 📊 Key Results
 
@@ -35,7 +32,6 @@ The project implements and compares three models — **Logistic Regression**, **
 
 > **Key finding:** Logistic Regression achieves the highest raw accuracy and weighted F1. The corrected LSTM achieves a marginally higher macro-averaged ROC-AUC than LinearSVC, indicating superior probability calibration — a meaningful distinction for real-world deployment where confidence scores matter.
 
----
 
 ## 🗂️ Dataset
 
@@ -49,7 +45,6 @@ The project implements and compares three models — **Logistic Regression**, **
 
 Each record contains a `prompt`, a `response`, a 14-category harm label dictionary, and a binary `is_safe` flag. The 14 BeaverTails categories are consolidated into the 4-class scheme above.
 
----
 
 ## 🔧 Pipeline
 
@@ -90,7 +85,6 @@ TF-IDF Features     Learning Rate Search (0.01 / 0.001 / 0.0001)
   Real-time Inference Function
 ```
 
----
 
 ## 🧠 Model Architectures
 
@@ -129,7 +123,6 @@ Each candidate was trained under identical conditions (`batch_size=8192`, `epoch
 
 > ⚠️ **Bug fix documented:** An earlier version fitted the tokeniser and label encoder on the full imbalanced corpus rather than the balanced training subset (`X_train_final`). This substantially degraded Class 2 (Social/Contextual Harm) performance. The corrected version is evaluated here.
 
----
 
 ## 📁 Repository Structure
 
@@ -151,7 +144,6 @@ safe-tweet-detector/
 └── .gitignore
 ```
 
----
 
 ## ⚙️ Setup & Usage
 
@@ -196,7 +188,6 @@ predict_new_text(text)
 # LSTM                → Class 1: Non-violent Harm  (confidence: 0.71)
 ```
 
----
 
 ## 📈 Evaluation Highlights
 
@@ -206,7 +197,6 @@ predict_new_text(text)
 - **EarlyStopping** applied to LSTM (patience=5) — overfitting observed from ~epoch 10; final model stopped at epoch 18
 - **Learning rate tuning** across 0.01 / 0.001 / 0.0001 — LR 0.001 selected (lowest val loss: 0.9264)
 
----
 
 ## 🔬 Key Findings
 
@@ -216,7 +206,6 @@ predict_new_text(text)
 4. **Learning rate 0.001 outperformed alternatives** — confirmed empirically through a three-way search; Adam's default is well-calibrated for this task but the tuning provides evidence rather than assumption
 5. **LinearSVC** and Logistic Regression perform near-identically overall, but LR's trigram feature range gives it a slight macro F1 edge
 
----
 
 ## 🚀 Future Work
 
@@ -226,7 +215,6 @@ predict_new_text(text)
 - **Deployment** as a REST API or browser extension for real-time content moderation
 - Ethical audit of model outputs for demographic bias across protected characteristics
 
----
 
 ## 📚 References
 
