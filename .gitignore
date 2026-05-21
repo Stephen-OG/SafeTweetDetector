@@ -11,5 +11,6 @@ Thumbs.db
 # ── Project-specific exclusions ───────────────────────────────────────────────
 .venv/
 __pycache__/
+var/
 dataset/
 2025 Sem A Choosing a Project Form.docx
