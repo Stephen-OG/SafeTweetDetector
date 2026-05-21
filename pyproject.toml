@@ -8,14 +8,15 @@ version = "0.1.0"
 description = "Production-style moderation MVP for 4-class harm detection."
 requires-python = ">=3.10"
 dependencies = [
+  "accelerate>=0.26",
   "datasets>=2.19",
   "fastapi>=0.111",
   "httpx>=0.27",
-  "numpy>=1.26",
+  "numpy>=1.26,<2",
   "pydantic>=2.7",
   "scikit-learn>=1.4",
   "torch>=2.2",
-  "transformers>=4.41",
+  "transformers>=4.41,<5",
   "uvicorn[standard]>=0.30"
 ]
 
