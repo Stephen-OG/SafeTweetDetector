@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "safe-tweet-detector"
 version = "0.1.0"
 description = "Production-style moderation MVP for 4-class harm detection."
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.13"
 dependencies = [
   "accelerate>=0.26",
   "datasets>=2.19",

@@ -216,6 +216,79 @@ predict_new_text(text)
 - Ethical audit of model outputs for demographic bias across protected characteristics
 
 
+## Real Moderation MVP
+
+The production-style MVP adds a Python package, FastAPI moderation service, SQLite moderation queue, analytics, and a transformer training/export path.
+
+### Local Setup
+
+Use Python 3.10, 3.11, or 3.12. If your global `python3` is newer, create a local 3.12 environment with `uv`:
+
+```bash
+uv venv --python 3.12
+uv pip install -e ".[dev]"
+```
+
+With an already-compatible Python:
+
+```bash
+python3 -m pip install -e ".[dev]"
+```
+
+### Run Tests
+
+```bash
+python3 -m pytest
+```
+
+### Start The API
+
+By default, the API uses a deterministic mock model so the moderation queue and analytics can be tested without waiting for transformer training.
+
+```bash
+SAFETWEET_DB_PATH=var/moderation.db \
+python3 -m uvicorn safetweet.api.app:app --host 127.0.0.1 --port 8000
+```
+
+### Moderate Text
+
+```bash
+curl -s -X POST http://127.0.0.1:8000/moderate \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"How can I steal something?"}'
+```
+
+### Inspect Queue And Analytics
+
+```bash
+curl -s http://127.0.0.1:8000/queue
+curl -s http://127.0.0.1:8000/analytics
+```
+
+### Train A Transformer
+
+Use small limits for a smoke test:
+
+```bash
+python3 -m safetweet.training.train_transformer \
+  --train-limit 32 \
+  --eval-limit 32 \
+  --epochs 0.1 \
+  --batch-size 4 \
+  --output-dir models/transformer-smoke \
+  --metrics-dir reports/metrics-smoke \
+  --model-version smoke-test
+```
+
+Use the exported model in the API:
+
+```bash
+SAFETWEET_MODEL_DIR=models/transformer-smoke \
+SAFETWEET_DB_PATH=var/moderation.db \
+python3 -m uvicorn safetweet.api.app:app --host 127.0.0.1 --port 8000
+```
+
+
 ## 📚 References
 
 - Ji, J. et al. (2024). *BeaverTails: Towards Improved Safety Alignment of LLM via a Human-Preference Dataset*. PKU-Alignment.
