@@ -9,5 +9,6 @@ Thumbs.db
 ~$*.pptx
 
 # ── Project-specific exclusions ───────────────────────────────────────────────
+.venv/
 dataset/
 2025 Sem A Choosing a Project Form.docx
